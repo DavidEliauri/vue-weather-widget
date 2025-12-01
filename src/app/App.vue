@@ -1,11 +1,17 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+  import { computed } from 'vue';
+  import { RouterView, useRoute } from 'vue-router';
+  import { DefaultLayout } from '@/shared/ui/layouts';
+
+  const route = useRoute();
+
+  const layout = computed(() => {
+    return route.meta.layout || DefaultLayout;
+  });
+</script>
 
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+  <component :is="layout">
+    <RouterView />
+  </component>
 </template>
-
-<style scoped></style>
